@@ -97,4 +97,8 @@ public class CarritoService {
         carrito.setTotal(BigDecimal.ZERO);
         carritoRepository.save(carrito);
     }
+
+    public Carrito saveCarrito(Carrito carrito) {
+        return carritoRepository.save(carrito);
+    }
 }
