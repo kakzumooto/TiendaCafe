@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/productos")
-@CrossOrigin(origins = "http://localhost:5173") // <--- ¡IMPORTANTE PARA REACT!
+@CrossOrigin(origins = {"http://localhost:5173","https://cafeteria-frontend-ochre.vercel.app"})
 public class ProductoController {
 
     @Autowired
