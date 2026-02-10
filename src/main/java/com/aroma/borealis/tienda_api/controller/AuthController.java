@@ -24,6 +24,7 @@ public class AuthController {
             @RequestBody RegisterRequest request
     ) {
 
+        System.out.println("📢 INTENTO DE REGISTRO RECIBIDO: " + request.getEmail());
         AuthResponse response = authService.register(request);
 
         return ResponseEntity.ok(response);

@@ -4,6 +4,7 @@ import com.aroma.borealis.tienda_api.exception.ResourceNotFoundException;
 import com.aroma.borealis.tienda_api.model.*;
 import com.aroma.borealis.tienda_api.repository.OrdenRepository;
 import com.aroma.borealis.tienda_api.repository.ProductoRepository;
+import com.aroma.borealis.tienda_api.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class OrderService {
 
     @Autowired
     private OrdenRepository ordenRepository;
+
+    @Autowired private UsuarioRepository usuarioRepository;
 
     @Autowired
     private ProductoRepository productoRepository;
@@ -38,7 +41,6 @@ public class OrderService {
                     Producto producto = itemCarrito.getProducto();
                     if (producto.getStock() < itemCarrito.getCantidad()) {
                         // Si el stock es insuficiente, lanzamos una excepción.
-                        // ¡Gracias a @Transactional, esto cancelará toda la orden y el carrito NO se vaciará!
                         throw new IllegalArgumentException("Stock insuficiente para el producto: " + producto.getNombre());
                     }
 
@@ -71,5 +73,11 @@ public class OrderService {
         carritoService.recalculateTotal(carrito);
         carritoService.saveCarrito(carrito);
         return ordenRepository.save(orden);
+    }
+
+    public List<Orden> obtenerMisOrdenes(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return ordenRepository.findByUsuarioId(usuario.getId());
     }
 }

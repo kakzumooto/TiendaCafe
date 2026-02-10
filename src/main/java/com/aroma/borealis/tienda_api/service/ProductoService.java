@@ -51,4 +51,10 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
+    public Producto guardarProducto(Producto producto) {
+        return productoRepository.save(producto);
+    }
+
+
+
 }

@@ -29,4 +29,19 @@ public class CarritoController {
         Carrito carrito = carritoService.getCarrito();
         return ResponseEntity.ok(carrito);
     }
+
+
+    @DeleteMapping("/items/{itemId}")
+    public ResponseEntity<Void> eliminarItem(@PathVariable Long itemId) {
+
+        carritoService.eliminarItem(itemId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/items/{itemId}")
+    public ResponseEntity<Void> actualizarCantidad(@PathVariable Long itemId, @RequestBody Integer nuevaCantidad) {
+        carritoService.actualizarCantidad(itemId, nuevaCantidad);
+        return ResponseEntity.ok().build();
+    }
+
 }
