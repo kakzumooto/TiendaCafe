@@ -25,7 +25,6 @@ public class OrderController {
 
     @PostMapping("/checkout")
     public ResponseEntity<Orden> checkout() {
-        // Aquí ajusté para llamar al método sin parámetros (ya que el servicio busca al usuario)
         Orden nuevaOrden = orderService.placeOrder();
         return ResponseEntity.ok(nuevaOrden);
     }
