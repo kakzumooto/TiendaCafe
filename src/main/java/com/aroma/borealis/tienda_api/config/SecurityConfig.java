@@ -37,7 +37,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**").permitAll()
 
                         // 2. Permitir ver productos (que están en /api/productos/**)
-                        .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/productos", "/api/productos/**").permitAll()
 
                         // 3. Permitir el chequeo del navegador (OPTIONS) para evitar errores de CORS
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
